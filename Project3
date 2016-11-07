@@ -5,19 +5,19 @@
 """ 
 
 
-string = input()
-print("Предложений:", string.count("." or "!" or "?"))
-print("Слов:", string.count(" ") + 1)
-syllables = 0
-for char in string.lower():
+string = input()        #String to input and analyze
+print("Предложения:", string.count("." or "!" or "?"))              #How many sentences in a string?
+print("Слов:", string.count(" ") + 1)       #How many words in a string?
+syllables = 0       #Syllables variable
+for char in string.lower():     #Loop to find how many syllables in a text
     if char in ["а","е","ё","и","о","у","ы","э","ю","я"]:
         syllables+=1
-print("Слогов:", syllables)
-ASL = (string.count(" ") + 1) / string.count("." or "!" or "?")
-print("Средняя длина предложения в словах:", ASL)
-ASW = syllables / (string.count(" ") + 1)
-print("Средняя длина слова в слогах:", ASW)
-FRE = 206.835 - (1.3 * ASL) - (60.1 * ASW)
+print("Слогов:", syllables)     #Print the count of syllables
+ASL = (string.count(" ") + 1) / string.count("." or "!" or "?")     #Average Sentence Length
+print("Средняя длина предложения в словах:", ASL)       #Print ASL
+ASW = syllables / (string.count(" ") + 1)       #Average Number of Syllables per Word
+print("Средняя длина слова в слогах:", ASW)     #Print ASW
+FRE = 206.835 - (1.3 * ASL) - (60.1 * ASW)      #Flesch-Kincaid readability test
 print("Индекс удобочитаемости Флеша:", FRE)
 if FRE>80: 
   print("Текст очень легко читается (для младших школьников).") 
