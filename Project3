@@ -1,30 +1,16 @@
-"""Case-study #3 Инвестиционный отчет
-Разработчики:
-Костин, Головко, Золотухин
-
-""" 
-
-
-string = input()        #String to input and analyze
-print("Предложения:", string.count("." or "!" or "?"))              #How many sentences in a string?
-print("Слов:", string.count(" ") + 1)       #How many words in a string?
-syllables = 0       #Syllables variable
-for char in string.lower():     #Loop to find how many syllables in a text
+import string
+inputstring = input()
+letter = input()
+inputstring.replace('а', 'а',letter,'а')
+inputstring.replace('о', 'о',letter,'о')
+inputstring.replace('и', 'и',letter,'и')
+inputstring.replace('е', 'е',letter,'е')
+inputstring.replace('ё', 'ё',letter,'ё')
+inputstring.replace('э', 'э',letter,'э')
+inputstring.replace('ы', 'ы',letter,'ы')
+inputstring.replace('у', 'у',letter,'у')
+inputstring.replace('ю', 'ю',letter,'ю')
+inputstring.replace('я', 'я',letter,'я')
+for char in string.lower():
     if char in ["а","е","ё","и","о","у","ы","э","ю","я"]:
-        syllables+=1
-print("Слогов:", syllables)     #Print the count of syllables
-ASL = (string.count(" ") + 1) / string.count("." or "!" or "?")     #Average Sentence Length
-print("Средняя длина предложения в словах:", ASL)       #Print ASL
-ASW = syllables / (string.count(" ") + 1)       #Average Number of Syllables per Word
-print("Средняя длина слова в слогах:", ASW)     #Print ASW
-FRE = 206.835 - (1.3 * ASL) - (60.1 * ASW)      #Flesch-Kincaid readability test
-print("Индекс удобочитаемости Флеша:", FRE)
-if FRE>80: 
-  print("Текст очень легко читается (для младших школьников).") 
-elif 80>=FRE>50: 
-  print("Простой текст (для школьников).") 
-elif 50>=FRE>25: 
-  print("Текст немного трудно читать (для студентов).") 
-else : 
-  print("Текст трудно читается (для выпускников ВУЗов).")
 
