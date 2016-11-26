@@ -1,16 +1,23 @@
-import string
-inputstring = input()
-letter = input()
-inputstring.replace('а', 'а',letter,'а')
-inputstring.replace('о', 'о',letter,'о')
-inputstring.replace('и', 'и',letter,'и')
-inputstring.replace('е', 'е',letter,'е')
-inputstring.replace('ё', 'ё',letter,'ё')
-inputstring.replace('э', 'э',letter,'э')
-inputstring.replace('ы', 'ы',letter,'ы')
-inputstring.replace('у', 'у',letter,'у')
-inputstring.replace('ю', 'ю',letter,'ю')
-inputstring.replace('я', 'я',letter,'я')
-for char in string.lower():
-    if char in ["а","е","ё","и","о","у","ы","э","ю","я"]:
+import urllib.request
 
+file_in = open('input.txt','r')
+file_out = open('output.txt','w')
+
+url = 'http://www.nfl.com/player/brycepetty/2552369/profile'
+f = urllib.request.urlopen(url)
+s = f.read()
+text = str(s)
+part_name = text.find('player-name')
+name = text[text.find('>',part_name)+1:text.find('&',part_name)]
+parameters = text[text.find('totals\">TOTAL</td>')+18:
+                  text.find('</tr>',text.find('totals\">TOTAL</td>'))]
+bad = {'\\', 't', 'n', '\n', '\t', 'd', '/'}
+bad2 = {'<>'}
+for x in bad:
+    parameters = parameters.replace(x, '')
+for x in bad2:
+    parameters = parameters.replace(x, ' ').strip(' ')
+print(parameters)
+
+file_in.close()
+file_out.close()
