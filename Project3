@@ -3,6 +3,8 @@ import urllib.request
 file_in = open('input.txt','r')
 file_out = open('output.txt','w')
 for line in file_in:
+    
+# reading lines from input.txt
     f = urllib.request.urlopen(line)
     s = f.read()
     text = str(s)
@@ -10,12 +12,15 @@ for line in file_in:
     name = text[text.find('>',part_name)+1 : text.find('&',part_name)]
     parameters = text[text.find('totals\">TOTAL</td>')+18 : 
                       text.find('</tr>',text.find('totals\">TOTAL</td>'))]
+    # Searching the beginning of parameters from HTML text
     bad = {'\\', 't', 'n', '\n', '\t', 'd', '/', ','}
     bad2 = {'<>'}
     for x in bad:
         parameters = parameters.replace(x, '')
     for x in bad2:
         parameters = parameters.replace(x, ' ').strip(' ')
+    # Deleting useless symbols in HTML text
+    
     comp = float(parameters[:parameters.find(' ')])
     parameters = parameters[parameters.find(' ')+2 :]
     att = float(parameters[:parameters.find(' ')])
@@ -30,11 +35,14 @@ for line in file_in:
     parameters = parameters[parameters.find(' ')+2 :]
     Int = float(parameters[:parameters.find(' ')])
     parameters = parameters[parameters.find(' ')+2 :]
+    # Dividing HTML text on parameters
+    
     a = (comp / att - 0.3) * 5
     b = (yds / att - 3) * 0.25
     c = (td / att) * 20
     d = 2.375 - (Int / att * 25)
     pr = (a + b + c + d) / 6 * 100
+    # Calculating the passer rating
     print('{:<20}{:<7.0f}{:<7.0f}{:<7.0f}{:<7.0f}{:<7.0f}{:<7.2f}'.format(
         name, att, comp, yds, td, Int, pr), file = file_out)
 
